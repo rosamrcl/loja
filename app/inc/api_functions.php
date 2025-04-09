@@ -12,6 +12,9 @@ function api_request($endpoint, $method='GET', $variables=[]){
     //se o metodo for GET
     if($method=='GET'){
         $url.="?endpoint=$endpoint";
+        if(!empty($variables)){
+            $url.="&".http_build_query($variables);
+        }
     }
 
     //se o metodo for POST
@@ -21,7 +24,7 @@ function api_request($endpoint, $method='GET', $variables=[]){
     }
 
     //incorporar o endpoint
-    curl_setopt($client, CURLOPT_URL, true);
+    curl_setopt($client, CURLOPT_URL, $url);
     $response=curl_exec($client);
     return json_decode($response,true);
 

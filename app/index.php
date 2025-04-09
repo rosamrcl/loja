@@ -9,6 +9,8 @@ $variaveis=[
     'sobrenome'=>'Chagas'
 ];
 
-api_request('stauts', 'GET', $variaveis);
+$result=api_request('status', 'GET', $variaveis);
+echo'<pre>';
+print_r($result);
 
 ?>
