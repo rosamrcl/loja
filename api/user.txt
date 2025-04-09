@@ -1,0 +1,2 @@
+login:user_loja_api
+senha:VIyubiLehI4Ajoqu2ak2zIc71uv374
