@@ -1,20 +1,49 @@
 <?php
-header("Content-Type: application/json");
 
-$data['status']='SUCESS';
-$data['method']=$_SERVER['REQUEST_METHOD'];
+// dependencies
 
-//apresentar as variaveis que vieram no pedido (GET ou POST)
+require_once(dirname(__FILE__) . '/inc/config.php');
+require_once(dirname(__FILE__) . '/inc/api_response.php');
+require_once(dirname(__FILE__) . '/inc/api_logic.php');
 
-if($data['method']=='GET'){
-    
-    $data['data']=$_GET;
+// --------------------------------------------------------
+// instanciate the api_classe
+$api_response = new api_response();
 
-}elseif($data['method']=='POST'){
-    $data['data']==$_POST;
+// --------------------------------------------------------
+// check if method is valid
+if(!$api_response->check_method($_SERVER['REQUEST_METHOD']))
+{
+    // send error reponse
+    $api_response->api_request_error('Invalid request method.');
 }
 
-echo json_encode($data);
+// --------------------------------------------------------
+// set request method
+$api_response->set_method($_SERVER['REQUEST_METHOD']);
+$params = null;
+if($api_response->get_method() == 'GET'){
+    $api_response->set_endpoint($_GET['endpoint']);
+    $params = $_GET;
+} elseif($api_response->get_method() == 'POST'){
+    $api_response->set_endpoint($_POST['endpoint']);
+    $params = $_POST;
+}
 
+// --------------------------------------------------------
+// prepare the api logic
+$api_logic = new api_logic($api_response->get_endpoint(), $params);
 
-?>
+// --------------------------------------------------------
+// check if endpoint exists
+if(!$api_logic->endpoint_exists()){
+    $api_response->api_request_error('Inexistent endpoint: ' . $api_response->get_endpoint());
+}
+
+// request to the api_logic
+$result = $api_logic->{$api_response->get_endpoint()}();
+$api_response->add_do_data('data', $result);
+
+$api_response->send_response();
+
+// $api_response->send_api_status();

@@ -1,33 +1,32 @@
 <?php
-function api_request($endpoint, $method='GET', $variables=[]){
 
-    //iniciando curl do cliente
-    $client=curl_init();
-    
-    curl_setopt($client, CURLOPT_RETURNTRANSFER,true);     // CURLOPT_RETURNTRANSFERtransfere para uma string
+function api_request($endpoint, $method = 'GET', $variables = []){
 
-    //definir a nosa url
-    $url=API_BASE_URL;
+    // initiate the curl client
+    $client = curl_init();
 
-    //se o metodo for GET
-    if($method=='GET'){
-        $url.="?endpoint=$endpoint";
+    // return the result as a string
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+
+    // defines the url
+    $url = API_BASE_URL;
+
+    // if request is GET
+    if($method == 'GET'){
+        $url .= "?endpoint=$endpoint";
         if(!empty($variables)){
-            $url.="&".http_build_query($variables);
+            $url .= "&" . http_build_query($variables);
         }
     }
 
-    //se o metodo for POST
-    if($method=='POST'){
-        $variables=array_merge(['endpoint'=>$endpoint],$variables);
-        curl_setopt($client, CURLOPT_POSTFIELDS, $variables);     //CURLOPT_POSTFIELDS codifica os dados da string que pedimos inicialmente para transformar em string        
+    // if request if POST
+    if($method == 'POST'){
+        $variables = array_merge(['endpoint' => $endpoint], $variables);
+        curl_setopt($client, CURLOPT_POSTFIELDS, $variables);
     }
 
-    //incorporar o endpoint
     curl_setopt($client, CURLOPT_URL, $url);
-    $response=curl_exec($client);
-    return json_decode($response,true);
 
-    echo $url;
+    $response = curl_exec($client);
+    return json_decode($response, true);
 }
-?>

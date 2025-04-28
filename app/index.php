@@ -1,16 +1,18 @@
 <?php
-//dependencias
 
+// dependencies
 require_once('inc/config.php');
-require_once ('inc/api_functions.php');
+require_once('inc/api_functions.php');
+echo '<pre>';
 
-$variaveis=[
-    'nome'=>'Círia',
-    'sobrenome'=>'Chagas'
-];
+$results = api_request('status', 'GET');
+print_r($results);
 
-$result=api_request('status', 'GET', $variaveis);
-echo'<pre>';
-print_r($result);
+$results = api_request('statusx', 'GET');
+print_r($results);
 
-?>
+$results = api_request('get_all_clients', 'GET');
+print_r($results);
+
+$results = api_request('get_all_products', 'GET');
+print_r($results);
