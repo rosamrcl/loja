@@ -1,63 +1,62 @@
 -- --------------------------------------------------------
--- Anfitrião:                    127.0.0.1
--- Versão do servidor:           5.7.33 - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Versão:              11.2.0.6213
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           8.0.30 - MySQL Community Server - GPL
+-- OS do Servidor:               Win64
+-- HeidiSQL Versão:              12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for loja_api
+-- Copiando estrutura do banco de dados para loja_api
 DROP DATABASE IF EXISTS `loja_api`;
-CREATE DATABASE IF NOT EXISTS `loja_api` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE IF NOT EXISTS `loja_api` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `loja_api`;
 
--- Dumping structure for table loja_api.clientes
+-- Copiando estrutura para tabela loja_api.clientes
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE IF NOT EXISTS `clientes` (
-  `id_cliente` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) DEFAULT NULL,
+  `id_client` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
+  `tel` varchar(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `update_at` datetime DEFAULT NULL,
+  `delete_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_client`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table loja_api.clientes: ~0 rows (approximately)
-/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` (`id_cliente`, `nome`, `email`, `telefone`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'joao', 'joao@gmail.com', '111222', '2021-10-18 15:28:54', '2021-10-18 15:28:56', NULL),
-	(2, 'ana', 'ana@gmail.com', '222333', '2021-10-18 15:29:12', '2021-10-18 15:29:13', NULL);
-/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+-- Copiando dados para a tabela loja_api.clientes: ~2 rows (aproximadamente)
+INSERT INTO `clientes` (`id_client`, `name`, `email`, `tel`, `created_at`, `update_at`, `delete_at`) VALUES
+	(1, 'Rosa', 'mariarosacl2008@gmail.com', '(82)9999-9999', '2025-04-09 15:13:27', '2025-04-09 15:13:37', NULL),
+	(2, 'Ângela', 'angela@gmail.com', '(82)8888-8888', '2025-04-09 15:14:57', '2025-04-09 15:14:59', NULL);
 
--- Dumping structure for table loja_api.produtos
+-- Copiando estrutura para tabela loja_api.produtos
 DROP TABLE IF EXISTS `produtos`;
 CREATE TABLE IF NOT EXISTS `produtos` (
-  `id_produto` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_produto` int unsigned NOT NULL AUTO_INCREMENT,
   `produto` varchar(50) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT '0',
+  `quantidade` int DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id_produto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table loja_api.produtos: ~0 rows (approximately)
-/*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
+-- Copiando dados para a tabela loja_api.produtos: ~2 rows (aproximadamente)
 INSERT INTO `produtos` (`id_produto`, `produto`, `quantidade`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'pregos', 100, '2021-10-18 15:29:45', '2021-10-18 15:29:45', NULL),
-	(2, 'parafusos', 250, '2021-10-18 15:29:54', '2021-10-18 15:29:55', NULL),
-	(3, 'alfinetes', 300, '2021-10-18 15:30:13', '2021-10-18 15:30:13', NULL);
-/*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
+	(1, 'pregos', 100, '2025-04-09 15:15:26', '2025-04-09 15:15:27', NULL),
+	(2, 'Parafusos', 200, '2025-04-09 15:15:45', '2025-04-09 15:15:46', NULL),
+	(3, 'alfunetes', 350, '2025-04-09 15:16:03', '2025-04-09 15:16:06', NULL);
 
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
